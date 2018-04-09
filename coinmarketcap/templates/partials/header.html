@@ -1,0 +1,25 @@
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="/"><img src="{% static "img/logo.png" %}" alt="" width="32"></a>
+  <ul class="nav navbar-nav mr-auto"></ul>
+  {% if request.user.is_authenticated %}
+    {% if request.user.profile and request.user.profile.avatar_picture_name %}
+      {% with 'img/avatars/'|add:request.user.profile.avatar_picture_name as avatar_path %}
+         <img src="{% static avatar_path %}" alt="" width='30px'>
+      {% endwith %}
+    {% else %}
+      <img src="{% static "img/avatars/256_1.png" %}" alt="" width='30px'>
+    {% endif %}
+  {% endif %}
+  <ul class="nav navbar-nav">
+  {% if request.user.is_authenticated %}
+
+    <li class="nav-item"><a class="nav-link active" href="#">
+       {{request.user.username|capfirst}}</a>
+    </li>
+    <li class="nav-item"><a class="btn btn-outline-light" href="/accounts/logout">Log out</a></li>
+  {% else %}
+    <li class="nav-item"><a class="btn btn-outline-light" href="/accounts/login">Log in</a></li>
+  {% endif %}
+  </ul>
+</nav>

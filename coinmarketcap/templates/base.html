@@ -1,0 +1,39 @@
+{% load bootstrap4 %}
+{% load humanize %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://rmotr.com/static/favicons/apple-icon-60x60.c69b596ccabe.png">
+    <title>{% block meta_title %}{% endblock %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+  </head>
+
+  <body>
+    {% include "partials/header.html" %}
+
+
+    <main role="main" class="container">
+      <div class="messages-container">
+        {% bootstrap_messages %}
+      </div>
+      {% block main_content %}{% endblock %}
+    </main>
+    <script type="text/javascript">
+      var APP_CONF = {
+        'csrf_token': "{{ csrf_token }}",
+        'favorite_url': "{% url 'favorite' %}"
+      }
+      window.APP_CONF = APP_CONF
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/main.js' %}" charset="utf-8"></script>
+  </body>
+</html>

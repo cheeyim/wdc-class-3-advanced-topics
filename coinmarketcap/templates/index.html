@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block main_content %}
+<div class="starter-template">
+  <h1>Coinmarketcap clone</h1>
+  <p class="lead">This is a sample copy of <a href="https://coinmarketcap.com/" target="_blank">https://coinmarketcap.com/</a>, only for educational purposes.</p>
+  <a class="btn btn-success btn-primary" href="/create" role="button"><i class="fa fa-plus"></i> Add new coin</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Market Cap</th>
+          <th>Price</th>
+          <th>Volume (24h)</th>
+          <th>Circulating supply</th>
+          <th>Change (24h)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for coin in coins %}
+        <tr>
+          <td>{{coin.rank}}</td>
+          <td>
+            <img src="https://coincheckup.com/images/coins/{{coin.slug}}.png" alt="" width="16">
+            <a href="https://coinmarketcap.com/currencies/{{coin.slug}}/">{{coin.name}}</a>
+          </td>
+          <td>${{coin.market_cap_usd|floatformat|intcomma}}</td>
+          <td>${{coin.price_usd|intcomma}}</td>
+          <td>${{coin.volume_usd_24h|floatformat|intcomma}}</td>
+          <td>{{coin.available_supply|floatformat|intcomma}} {{coin.symbol}}</td>
+          <td class="{% if coin.percent_change_24h > 0.0 %}change-up{% else %}change-down{% endif%}">{{coin.percent_change_24h}}%</td>
+          <td>
+            {% if coin in favorite_coins %}
+              <a href="#" data-coin-id="{{ coin.id }}" class="js-favorite-coin"><i class="fa fa-star"></i></a>
+            {% else %}
+              <a href="#" data-coin-id="{{ coin.id }}" class="js-favorite-coin"><i class="fa fa-star-o"></i></a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}
