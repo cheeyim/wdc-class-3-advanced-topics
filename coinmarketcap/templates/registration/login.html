@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block main_content %}
+<div class="starter-template">
+  <h1>Log in</h1>
+  <p class="lead">
+    Access your Coinmarketcap account.
+  </p>
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+  </form>
+</div>
+{% endblock %}

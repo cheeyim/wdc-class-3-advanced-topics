@@ -1,0 +1,12 @@
+.container {
+  margin-top: 100px;
+}
+table {
+  margin-top: 50px;
+}
+td.change-up {
+  color: #093;
+}
+td.change-down {
+  color: #d14836;
+}
